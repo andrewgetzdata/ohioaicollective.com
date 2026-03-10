@@ -15,33 +15,32 @@ export default function Jobs() {
   const { data: jobs, isLoading } = useJobs(searchTerm, selectedType);
 
   const jobTypes = ["All", "Full-time", "Part-time", "Contract", "Internship"];
-
-  // Jobs are already filtered by the useJobs hook
   const filteredJobs = jobs;
 
   return (
-    <div className="min-h-screen" style={{ background: '#0f1011' }}>
+    <div className="min-h-screen bg-[#F7F7F2]">
       {/* Header */}
-      <section className="py-16 border-b" style={{ borderColor: 'rgba(255, 255, 255, 0.05)' }}>
+      <section className="py-16 border-b-2 border-[#1A1A1A] oac-grid-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-center mb-8"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-4"
-                 style={{ 
-                   backgroundColor: 'rgba(31, 201, 255, 0.12)', 
-                   color: '#1FC9FF',
-                   letterSpacing: '0.06em'
+            <div className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold mb-4 border-2 border-[#1A1A1A]"
+                 style={{
+                   backgroundColor: '#F7F7F2',
+                   color: '#1A1A1A',
+                   letterSpacing: '0.08em',
+                   fontFamily: 'Geist Mono, monospace'
                  }}>
               <Briefcase className="w-4 h-4" />
               CAREER OPPORTUNITIES
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Find Your Next Data Role
+            <h1 className="text-4xl md:text-5xl font-bold text-[#1A1A1A] mb-4 uppercase" style={{ fontFamily: 'Geist Sans, system-ui, sans-serif' }}>
+              Find Your Next Role
             </h1>
-            <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
+            <p className="text-lg text-[#1A1A1A]/70 max-w-2xl mx-auto" style={{ fontFamily: 'Geist Mono, monospace' }}>
               Explore tech opportunities from leading Ohio companies
             </p>
           </motion.div>
@@ -49,16 +48,13 @@ export default function Jobs() {
           {/* Search Bar */}
           <div className="max-w-3xl mx-auto">
             <div className="relative">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-zinc-500" />
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-[#1A1A1A]/40" />
               <Input
                 placeholder="Search by title, company, or skills..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-12 pr-4 py-6 text-lg border-white/10 focus:border-[#E5FE57]/50"
-                style={{ 
-                  background: 'rgba(17, 18, 20, 0.8)',
-                  color: 'white'
-                }}
+                className="pl-12 pr-4 py-6 text-lg border-2 border-[#1A1A1A] focus:border-[#D14D28] bg-[#F7F7F2] text-[#1A1A1A]"
+                style={{ fontFamily: 'Geist Mono, monospace' }}
               />
             </div>
           </div>
@@ -69,8 +65,8 @@ export default function Jobs() {
         {/* Filters */}
         <div className="mb-8">
           <div className="flex items-center gap-2 mb-4">
-            <Filter className="w-4 h-4 text-zinc-500" />
-            <span className="text-sm font-medium text-zinc-400 uppercase tracking-wide">Filter by type:</span>
+            <Filter className="w-4 h-4 text-[#1A1A1A]/50" />
+            <span className="text-sm font-medium text-[#1A1A1A]/60 uppercase tracking-wide" style={{ fontFamily: 'Geist Mono, monospace' }}>Filter by type:</span>
           </div>
           <div className="flex flex-wrap gap-2">
             {jobTypes.map((type) => (
@@ -78,12 +74,19 @@ export default function Jobs() {
                 key={type}
                 variant={selectedType === type ? "default" : "outline"}
                 onClick={() => setSelectedType(type)}
-                className={`font-semibold ${selectedType === type ? '' : 'border-white/10 text-zinc-400 hover:text-white hover:bg-white/5'}`}
-                style={selectedType === type ? { 
-                  backgroundColor: '#E5FE57', 
-                  color: '#0f1011',
-                  boxShadow: '0 8px 16px rgba(229, 254, 87, 0.25)'
-                } : {}}
+                className="font-semibold uppercase"
+                style={selectedType === type ? {
+                  backgroundColor: '#D14D28',
+                  color: '#F7F7F2',
+                  boxShadow: '2px 2px 0px 0px #1A1A1A',
+                  letterSpacing: '0.04em'
+                } : {
+                  borderColor: '#1A1A1A',
+                  borderWidth: '2px',
+                  color: '#1A1A1A',
+                  backgroundColor: '#F7F7F2',
+                  letterSpacing: '0.04em'
+                }}
               >
                 {type}
               </Button>
@@ -93,7 +96,7 @@ export default function Jobs() {
 
         {/* Results Count */}
         <div className="mb-6">
-          <p className="text-zinc-400">
+          <p className="text-[#1A1A1A]/60" style={{ fontFamily: 'Geist Mono, monospace' }}>
             {filteredJobs.length} {filteredJobs.length === 1 ? "job" : "jobs"} found
           </p>
         </div>
@@ -102,28 +105,19 @@ export default function Jobs() {
         {isLoading ? (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {[...Array(6)].map((_, i) => (
-              <div key={i} className="animate-pulse rounded-2xl border p-6"
-                   style={{ 
-                     background: 'rgba(26, 27, 30, 0.78)',
-                     borderColor: 'rgba(255, 255, 255, 0.06)'
-                   }}>
+              <div key={i} className="animate-pulse border-2 border-[#1A1A1A] p-6 bg-[#F7F7F2]">
                 <div className="space-y-3">
-                  <div className="h-4 bg-white/10 rounded w-3/4" />
-                  <div className="h-3 bg-white/10 rounded w-1/2" />
+                  <div className="h-4 bg-[#1A1A1A]/10 w-3/4" />
+                  <div className="h-3 bg-[#1A1A1A]/10 w-1/2" />
                 </div>
               </div>
             ))}
           </div>
         ) : filteredJobs.length === 0 ? (
-          <div className="p-12 text-center rounded-2xl border"
-               style={{ 
-                 background: 'rgba(26, 27, 30, 0.78)',
-                 borderColor: 'rgba(255, 255, 255, 0.08)',
-                 borderStyle: 'dashed'
-               }}>
-            <Briefcase className="w-12 h-12 mx-auto mb-4" style={{ color: 'rgba(255, 255, 255, 0.3)' }} />
-            <h3 className="text-lg font-semibold text-white mb-2">No jobs found</h3>
-            <p className="text-zinc-500">Try adjusting your search or filters</p>
+          <div className="p-12 text-center border-2 border-dashed border-[#1A1A1A] bg-[#F7F7F2]">
+            <Briefcase className="w-12 h-12 mx-auto mb-4 text-[#1A1A1A]/30" />
+            <h3 className="text-lg font-semibold text-[#1A1A1A] mb-2 uppercase">No jobs found</h3>
+            <p className="text-[#1A1A1A]/50" style={{ fontFamily: 'Geist Mono, monospace' }}>Try adjusting your search or filters</p>
           </div>
         ) : (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">

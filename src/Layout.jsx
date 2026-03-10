@@ -1,84 +1,48 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import { Home, Briefcase, Calendar, Ticket, Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Menu, X } from "lucide-react";
+
 
 const navigationItems = [
   {
-    title: "Home",
-    url: createPageUrl("Home"),
-    icon: Home,
+    title: "MISSION",
+    url: createPageUrl("Mission"),
   },
   {
-    title: "Jobs",
+    title: "COLLECTIVE",
+    url: createPageUrl("Community"),
+  },
+  {
+    title: "JOBS",
     url: createPageUrl("Jobs"),
-    icon: Briefcase,
   },
   {
-    title: "Events",
+    title: "EVENTS",
     url: createPageUrl("Events"),
-    icon: Ticket,
   },
   {
-    title: "Calendar",
+    title: "CALENDAR",
     url: createPageUrl("Calendar"),
-    icon: Calendar,
   },
 ];
 
 export default function Layout({ children, currentPageName }) {
   const location = useLocation();
-  const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
-    <div className="min-h-screen bg-[#0f1011]">
-      <style>{`
-        :root {
-          --forge-lime: #E5FE57;
-          --forge-teal: #00F5A0;
-          --forge-cyan: #1FC9FF;
-          --forge-dark: #0f1011;
-          --forge-dark-card: #111214;
-        }
-        
-        body {
-          background: 
-            radial-gradient(circle at 12% -8%, rgba(229, 254, 87, 0.14), transparent 45%),
-            radial-gradient(circle at 82% 10%, rgba(31, 201, 255, 0.12), transparent 42%),
-            #0f1011;
-        }
-      `}</style>
-
+    <div className="min-h-screen bg-[#F7F7F2]">
       {/* Navigation */}
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? "bg-[#111214]/90 backdrop-blur-md border-b border-white/5"
-            : "bg-transparent"
-        }`}
+        className="fixed top-0 left-0 right-0 z-50 bg-[#F7F7F2] border-b border-[#1A1A1A]"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link to={createPageUrl("Home")} className="flex items-center gap-3 group">
-              <img 
-                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6910bba3f3d0053b1743a9b3/d3f628c61_Version1-Photoroom.png" 
-                alt="Forge Logo" 
-                className="w-7 h-7 transition-transform group-hover:scale-110"
-                style={{ objectFit: 'contain' }}
-              />
-              <span className="text-xl font-bold tracking-tight" style={{ color: '#E5FE57', fontFamily: 'ui-rounded, system-ui, sans-serif' }}>
-                forge
+              <span className="text-xl font-bold tracking-tight uppercase" style={{ color: '#D14D28', fontFamily: 'Geist Sans, system-ui, sans-serif' }}>
+                OAC
               </span>
             </Link>
 
@@ -90,14 +54,21 @@ export default function Layout({ children, currentPageName }) {
                   <Link
                     key={item.title}
                     to={item.url}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all font-medium ${
-                      isActive
-                        ? "text-[#E5FE57]"
-                        : "text-zinc-400 hover:text-white hover:bg-white/5"
-                    }`}
+                    className={`px-4 py-2 transition-all font-medium text-sm uppercase`}
+                    style={{
+                      letterSpacing: '0.08em',
+                      fontFamily: 'Geist Sans, system-ui, sans-serif',
+                      color: isActive ? '#D14D28' : '#1A1A1A',
+                      borderBottom: isActive ? '2px solid #D14D28' : '2px solid transparent',
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!isActive) e.currentTarget.style.color = '#D14D28';
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!isActive) e.currentTarget.style.color = '#1A1A1A';
+                    }}
                   >
-                    <item.icon className="w-4 h-4" />
-                    <span>{item.title}</span>
+                    {item.title}
                   </Link>
                 );
               })}
@@ -105,7 +76,7 @@ export default function Layout({ children, currentPageName }) {
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden p-2 rounded-lg hover:bg-white/5 text-white"
+              className="md:hidden p-2 text-[#1A1A1A]"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? (
@@ -119,7 +90,7 @@ export default function Layout({ children, currentPageName }) {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-[#111214] border-t border-white/5">
+          <div className="md:hidden bg-[#F7F7F2] border-t border-[#1A1A1A]">
             <div className="px-4 py-4 space-y-2">
               {navigationItems.map((item) => {
                 const isActive = location.pathname === item.url;
@@ -128,14 +99,15 @@ export default function Layout({ children, currentPageName }) {
                     key={item.title}
                     to={item.url}
                     onClick={() => setMobileMenuOpen(false)}
-                    className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all font-medium ${
-                      isActive
-                        ? "bg-[#E5FE57]/10 text-[#E5FE57]"
-                        : "text-zinc-400 hover:text-white hover:bg-white/5"
-                    }`}
+                    className={`block px-4 py-3 font-medium text-sm uppercase transition-all`}
+                    style={{
+                      letterSpacing: '0.08em',
+                      fontFamily: 'Geist Sans, system-ui, sans-serif',
+                      color: isActive ? '#D14D28' : '#1A1A1A',
+                      borderLeft: isActive ? '2px solid #D14D28' : '2px solid transparent',
+                    }}
                   >
-                    <item.icon className="w-5 h-5" />
-                    <span>{item.title}</span>
+                    {item.title}
                   </Link>
                 );
               })}
@@ -148,31 +120,27 @@ export default function Layout({ children, currentPageName }) {
       <main className="pt-16">{children}</main>
 
       {/* Footer */}
-      <footer className="bg-[#111214] border-t border-white/5 mt-20">
+      <footer className="bg-[#F7F7F2] border-t-2 border-[#1A1A1A] mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
               <div className="flex items-center gap-3 mb-4">
-                <img 
-                  src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6910bba3f3d0053b1743a9b3/d3f628c61_Version1-Photoroom.png" 
-                  alt="Forge Logo" 
-                  className="w-6 h-6"
-                  style={{ objectFit: 'contain' }}
-                />
-                <span className="text-lg font-bold" style={{ color: '#E5FE57', fontFamily: 'ui-rounded, system-ui, sans-serif' }}>forge</span>
+                <span className="text-lg font-bold uppercase" style={{ color: '#D14D28', fontFamily: 'Geist Sans, system-ui, sans-serif' }}>
+                  Ohio AI Collective
+                </span>
               </div>
-              <p className="text-sm text-zinc-400">
-                Building the future of data together, one session at a time.
+              <p className="text-sm text-[#1A1A1A]/70 font-mono">
+                Building decentralized, open AI for local innovation.
               </p>
             </div>
             <div>
-              <h3 className="font-semibold text-white mb-4">Quick Links</h3>
+              <h3 className="font-semibold text-[#1A1A1A] mb-4 uppercase text-sm" style={{ letterSpacing: '0.08em' }}>Quick Links</h3>
               <ul className="space-y-2 text-sm">
                 {navigationItems.map((item) => (
                   <li key={item.title}>
                     <Link
                       to={item.url}
-                      className="text-zinc-400 hover:text-[#E5FE57] transition-colors"
+                      className="text-[#1A1A1A]/70 hover:text-[#D14D28] transition-colors font-mono"
                     >
                       {item.title}
                     </Link>
@@ -181,14 +149,14 @@ export default function Layout({ children, currentPageName }) {
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold text-white mb-4">Community</h3>
-              <p className="text-sm text-zinc-400">
-                Join our vibrant data and AI community and connect with like-minded professionals.
+              <h3 className="font-semibold text-[#1A1A1A] mb-4 uppercase text-sm" style={{ letterSpacing: '0.08em' }}>Community</h3>
+              <p className="text-sm text-[#1A1A1A]/70 font-mono">
+                Join our collective of AI builders, researchers, and innovators across Ohio.
               </p>
             </div>
           </div>
-          <div className="mt-8 pt-8 border-t border-white/5 text-center text-sm text-zinc-500">
-            © 2025 Forge Data Community. All rights reserved.
+          <div className="mt-8 pt-8 border-t border-[#1A1A1A] text-center text-sm text-[#1A1A1A]/50 font-mono">
+            &copy; 2026 Ohio AI Collective. All rights reserved.
           </div>
         </div>
       </footer>

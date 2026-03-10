@@ -1,86 +1,72 @@
 import React from "react";
-import { Badge } from "@/components/ui/badge";
 import { Calendar, Clock, MapPin, User } from "lucide-react";
 import { format, parseISO } from "date-fns";
 
 export default function EventCard({ event, onClick, icon: Icon }) {
-  const typeColors = {
-    "Lightning Session": { bg: "rgba(229, 254, 87, 0.12)", text: "#E5FE57", border: "rgba(229, 254, 87, 0.3)" },
-    "Workshop": { bg: "rgba(168, 85, 247, 0.12)", text: "#A855F7", border: "rgba(168, 85, 247, 0.3)" },
-    "Ship Session": { bg: "rgba(236, 72, 153, 0.12)", text: "#EC4899", border: "rgba(236, 72, 153, 0.3)" },
-    "Social": { bg: "rgba(34, 211, 238, 0.12)", text: "#22D3EE", border: "rgba(34, 211, 238, 0.3)" },
-  };
-
-  const colors = typeColors[event.type] || typeColors["Lightning Session"];
   const eventDate = parseISO(event.date);
 
   return (
     <div
-      className="cursor-pointer transition-all duration-300 group h-full flex flex-col rounded-2xl border overflow-hidden"
+      className="cursor-pointer transition-all duration-300 group h-full flex flex-col border-2 border-[#1A1A1A] overflow-hidden bg-[#F7F7F2]"
       onClick={onClick}
-      style={{
-        background: 'linear-gradient(135deg, rgba(26, 27, 30, 0.78), rgba(24, 24, 27, 0.92))',
-        borderColor: 'rgba(255, 255, 255, 0.06)',
-        backdropFilter: 'blur(6px)',
-      }}
+      style={{ boxShadow: '2px 2px 0px 0px #1A1A1A' }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.borderColor = colors.border;
-        e.currentTarget.style.transform = 'translateY(-2px)';
+        e.currentTarget.style.transform = 'translate(-2px, -2px)';
+        e.currentTarget.style.boxShadow = '4px 4px 0px 0px #1A1A1A';
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.06)';
-        e.currentTarget.style.transform = 'translateY(0)';
+        e.currentTarget.style.transform = 'translate(0, 0)';
+        e.currentTarget.style.boxShadow = '2px 2px 0px 0px #1A1A1A';
       }}
     >
       {event.image_url && (
         <div className="relative h-48 overflow-hidden">
-          <img 
-            src={event.image_url} 
+          <img
+            src={event.image_url}
             alt={event.title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0f1011] via-transparent to-transparent" />
-          <div className="absolute top-3 left-3">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold border"
-                 style={{
-                   backgroundColor: colors.bg,
-                   color: colors.text,
-                   borderColor: colors.border
-                 }}>
-              {Icon && <Icon className="w-3 h-3" />}
+          <div className="absolute top-3 left-3 flex gap-2">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-semibold border-2 border-[#1A1A1A] bg-[#F7F7F2] text-[#1A1A1A] uppercase"
+                 style={{ letterSpacing: '0.06em', fontFamily: 'Geist Mono, monospace' }}>
               {event.type}
             </div>
+            {event.is_past && (
+              <div className="inline-flex items-center px-3 py-1.5 text-xs font-semibold border-2 border-[#1A1A1A] bg-[#1A1A1A] text-[#F7F7F2] uppercase"
+                   style={{ letterSpacing: '0.06em', fontFamily: 'Geist Mono, monospace' }}>
+                Past Event
+              </div>
+            )}
           </div>
         </div>
       )}
-      
+
       <div className="p-6 flex-1 flex flex-col">
         {!event.image_url && (
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-3 border self-start"
-               style={{
-                 backgroundColor: colors.bg,
-                 color: colors.text,
-                 borderColor: colors.border
-               }}>
-            {Icon && <Icon className="w-3 h-3" />}
-            {event.type}
+          <div className="flex gap-2 mb-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-semibold border-2 border-[#D14D28] text-[#D14D28] self-start uppercase"
+                 style={{ letterSpacing: '0.06em', fontFamily: 'Geist Mono, monospace' }}>
+              {event.type}
+            </div>
+            {event.is_past && (
+              <div className="inline-flex items-center px-3 py-1.5 text-xs font-semibold border-2 border-[#1A1A1A] bg-[#1A1A1A] text-[#F7F7F2] self-start uppercase"
+                   style={{ letterSpacing: '0.06em', fontFamily: 'Geist Mono, monospace' }}>
+                Past Event
+              </div>
+            )}
           </div>
         )}
 
-        <h3 className="text-xl font-semibold text-white mb-3 line-clamp-2"
-            style={{ 
-              transition: 'color 0.2s',
-            }}
-            onMouseEnter={(e) => e.currentTarget.style.color = colors.text}
-            onMouseLeave={(e) => e.currentTarget.style.color = 'white'}>
+        <h3 className="text-xl font-semibold text-[#1A1A1A] mb-3 line-clamp-2 group-hover:text-[#D14D28] transition-colors"
+            style={{ fontFamily: 'Geist Sans, system-ui, sans-serif' }}>
           {event.title}
         </h3>
-        
-        <p className="text-sm text-zinc-400 mb-4 line-clamp-3 flex-1">
+
+        <p className="text-sm text-[#1A1A1A]/60 mb-4 line-clamp-3 flex-1" style={{ fontFamily: 'Geist Mono, monospace' }}>
           {event.description}
         </p>
-        
-        <div className="space-y-2 text-sm text-zinc-500">
+
+        <div className="space-y-2 text-sm text-[#1A1A1A]/50" style={{ fontFamily: 'Geist Mono, monospace' }}>
           <div className="flex items-center gap-2">
             <Calendar className="w-4 h-4" />
             <span>{format(eventDate, "MMM d, yyyy")}</span>

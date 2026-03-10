@@ -11,6 +11,6 @@
     "image_url": "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=1,background=white,quality=75,width=400,height=400/event-covers/y9/054b8c44-f1b7-4efe-a1cd-4f5257934f7e.png",
     "max_attendees": null,
     "tags": ["AI"],
-    "is_past": true
+    "is_past": false
   }
 ]

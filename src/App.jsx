@@ -19,7 +19,7 @@ const LayoutWrapper = ({ children, currentPageName }) => Layout ?
 function App() {
   return (
     <QueryClientProvider client={queryClientInstance}>
-      <Router basename="/joinforge">
+      <Router basename="/ohio-ai-collective">
         <Routes>
           <Route path="/" element={
             <LayoutWrapper currentPageName={mainPageKey}>
