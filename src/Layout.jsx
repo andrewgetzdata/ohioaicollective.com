@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { Menu, X } from "lucide-react";
@@ -27,9 +27,23 @@ const navigationItems = [
   },
 ];
 
+const pageTitles = {
+  Home: "Home",
+  Mission: "Mission",
+  Community: "Collective",
+  Jobs: "Jobs",
+  Events: "Events",
+  Calendar: "Calendar",
+};
+
 export default function Layout({ children, currentPageName }) {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const title = pageTitles[currentPageName] || currentPageName;
+    document.title = `OAC | ${title}`;
+  }, [currentPageName]);
 
   return (
     <div className="min-h-screen bg-[#F7F7F2]">
