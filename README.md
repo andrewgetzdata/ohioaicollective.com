@@ -1,1 +1,1 @@
-# ohio-ai-collective
+# Base44 App

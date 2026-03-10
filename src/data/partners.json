@@ -1,0 +1,26 @@
+[
+  {
+    "name": "AI Makerspace",
+    "logo_url": "https://i.imgur.com/vhfBYuP.png",
+    "website_url": "https://aimakerspace.io/",
+    "display_order": 0,
+    "logo_height": "large",
+    "is_archived": false
+  },
+  {
+    "name": "Warp",
+    "logo_url": "https://i.imgur.com/sbCVIgo.png",
+    "website_url": "https://www.warp.dev/",
+    "display_order": 1,
+    "logo_height": "large",
+    "is_archived": false
+  },
+  {
+    "name": "Count",
+    "logo_url": "https://i.imgur.com/Phj73eQ.png",
+    "website_url": "https://count.co/",
+    "display_order": 2,
+    "logo_height": "small",
+    "is_archived": false
+  }
+]
