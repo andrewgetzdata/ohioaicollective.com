@@ -41,7 +41,7 @@ export default function Layout({ children, currentPageName }) {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link to={createPageUrl("Home")} className="flex items-center gap-3 group">
-              <span className="text-xl font-bold tracking-tight uppercase" style={{ color: '#D14D28', fontFamily: 'Geist Sans, system-ui, sans-serif' }}>
+              <span className="text-4xl font-bold tracking-tight uppercase" style={{ color: '#D14D28', fontFamily: 'Geist Sans, system-ui, sans-serif' }}>
                 OAC
               </span>
             </Link>

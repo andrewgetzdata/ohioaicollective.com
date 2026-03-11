@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { Button } from "@/components/ui/button";
-import { Brain, Cog, Map, ArrowRight } from "lucide-react";
+import { Rocket, BookOpen, Map, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import HeroAmbient from "../components/home/HeroAmbient";
+import BlinkingDots from "../components/animations/BlinkingDots";
+import ThinkingBlob from "../components/animations/ThinkingBlob";
+import DataFlow from "../components/animations/DataFlow";
 
 export default function Mission() {
   const [typedText, setTypedText] = useState("");
@@ -28,57 +31,51 @@ export default function Mission() {
 
   const initiatives = [
     {
-      icon: Brain,
-      title: "Neural Network Archive",
-      description: "Open research repository for community-built models and papers",
+      icon: Rocket,
+      title: "Community Solutions",
+      description: "AI-powered tools and applications that solve real problems for Ohio communities",
     },
     {
-      icon: Cog,
-      title: "Community-Driven Code",
-      description: "Collaborative open-source projects tackling real-world problems",
+      icon: BookOpen,
+      title: "AI Literacy & Ethics",
+      description: "Helping Ohio understand AI and use it responsibly",
     },
     {
       icon: Map,
-      title: "Localized Dataset",
-      description: "Ohio-specific datasets for training locally relevant AI systems",
+      title: "Localized Datasets",
+      description: "Ohio-specific datasets that fuel locally relevant AI solutions",
     },
   ];
 
   const expandedSections = [
     {
-      title: "Neural Network Archive",
-      icon: Brain,
+      title: "Community Solutions",
+      icon: Rocket,
       paragraphs: [
-        "The Neural Network Archive is our vision for an open, community-maintained repository of pretrained models specifically tuned for Ohio's key industries — from manufacturing and agriculture to healthcare and logistics. By pooling collective expertise, we can build AI resources that address the unique challenges of our region.",
-        "We envision a platform where researchers, engineers, and practitioners can share, discover, and build upon each other's work. Model cards, training methodologies, and benchmark results will all be openly documented, lowering the barrier for teams of any size to adopt and deploy cutting-edge AI.",
-        "This archive will serve as the backbone of Ohio's AI ecosystem — a shared resource that accelerates innovation while keeping the benefits local and accessible to all.",
+        "We build AI-powered tools and applications that solve real problems for Ohio — local government dashboards, small business automation, nonprofit data tools, and more.",
+        "Members collaborate through ship sessions and hackathons to take ideas from concept to deployment, creating practical solutions that serve our communities.",
       ],
-      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800",
-      imageAlt: "Neural network visualization",
+      animation: "blinkingDots",
       reversed: false,
     },
     {
-      title: "Community-Driven Code",
-      icon: Cog,
+      title: "AI Literacy & Ethics",
+      icon: BookOpen,
       paragraphs: [
-        "Community-Driven Code is our initiative to build open-source tools and libraries that solve real problems for Ohio's AI practitioners. Rather than reinventing the wheel, our members collaborate on shared infrastructure — from data pipelines and model serving frameworks to evaluation harnesses and deployment toolkits.",
-        "Every project starts with a real need identified by our community. Through ship sessions, workshops, and asynchronous collaboration, we turn ideas into production-ready code that anyone can use, extend, and contribute back to.",
-        "By building in the open, we create a flywheel of innovation — each contribution makes the ecosystem stronger, attracting more builders and accelerating the pace of development across the state.",
+        "We help Ohio's businesses, nonprofits, and local government understand AI — what it can do, how it works, and where the risks are. Workshops, explainers, and hands-on demos for technical and non-technical audiences alike.",
+        "We also champion responsible adoption: bias awareness, governance frameworks, and community review processes so AI deployed in Ohio is accountable and trustworthy.",
       ],
-      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800",
-      imageAlt: "Open source code collaboration",
+      animation: "thinkingBlob",
       reversed: true,
     },
     {
-      title: "Localized Dataset",
+      title: "Localized Datasets",
       icon: Map,
       paragraphs: [
-        "The Localized Dataset initiative aims to create high-quality, Ohio-specific datasets that power AI solutions tailored to our communities. From regional economic indicators and agricultural data to urban planning metrics and public health records, these datasets capture the nuances that generic national data misses.",
-        "We're building partnerships with local institutions, government agencies, and businesses to ethically source and curate data that reflects Ohio's diverse landscape. All datasets follow strict privacy and governance standards while remaining openly accessible for research and development.",
-        "With localized data, AI models can make better predictions, offer more relevant recommendations, and drive solutions that genuinely serve Ohioans — because the best AI isn't just powerful, it's relevant.",
+        "Ohio-specific datasets covering regional economics, agriculture, urban planning, and public health — the local nuances that power our community solutions and tools.",
+        "We partner with local institutions and businesses to ethically source data that reflects Ohio's landscape, with open access for research and development.",
       ],
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800",
-      imageAlt: "Data visualization and mapping",
+      animation: "dataFlow",
       reversed: false,
     },
   ];
@@ -204,15 +201,9 @@ export default function Mission() {
                 </Link>
               </div>
               <div className={section.reversed ? 'md:order-1' : ''}>
-                <img
-                  src={section.image}
-                  alt={section.imageAlt}
-                  className="w-full"
-                  style={{
-                    boxShadow: '8px 8px 0px 0px #1A1A1A',
-                    border: '2px solid #1A1A1A'
-                  }}
-                />
+                {section.animation === "blinkingDots" && <BlinkingDots />}
+                {section.animation === "thinkingBlob" && <ThinkingBlob />}
+                {section.animation === "dataFlow" && <DataFlow />}
               </div>
             </div>
           </div>

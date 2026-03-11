@@ -2,38 +2,38 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { Button } from "@/components/ui/button";
-import { Brain, Cog, Map, Users, Star } from "lucide-react";
+import { Rocket, BookOpen, Map, Users, Star } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function Community() {
   const contributions = [
     {
-      icon: Brain,
-      title: "Neural Network Archive",
-      subtitle: "Contribute Research & Models",
-      description: "Share your pretrained models, publish research findings, and help build Ohio's open AI model repository. Whether you're fine-tuning LLMs or training specialized classifiers, your contributions power the community.",
+      icon: Rocket,
+      title: "Community Solutions",
+      subtitle: "Build for Ohio",
+      description: "Help build AI-powered tools and applications that solve real problems for Ohio communities — local gov dashboards, small business automation, nonprofit data tools, and more.",
       actions: [
-        "Submit pretrained models and model cards",
-        "Share training methodologies and benchmarks",
-        "Review and validate community submissions",
+        "Pitch and lead solution projects",
+        "Ship tools at hackathons and build sessions",
+        "Connect us with orgs that need solutions",
       ],
     },
     {
-      icon: Cog,
-      title: "Community-Driven Code",
-      subtitle: "Build Open-Source Tools",
-      description: "Contribute to our growing ecosystem of open-source AI tools and libraries. From data pipelines to deployment frameworks, every pull request strengthens the collective.",
+      icon: BookOpen,
+      title: "AI Literacy & Ethics",
+      subtitle: "Educate & Advocate",
+      description: "Help Ohio understand and responsibly adopt AI. Lead workshops, create explainer content, and develop governance frameworks for local organizations.",
       actions: [
-        "Contribute to open-source projects",
-        "Propose and lead new tool initiatives",
-        "Mentor newer developers in the community",
+        "Lead or host educational workshops",
+        "Create beginner-friendly AI content",
+        "Help orgs develop responsible AI practices",
       ],
     },
     {
       icon: Map,
-      title: "Localized Dataset",
+      title: "Localized Datasets",
       subtitle: "Contribute Ohio-Specific Data",
-      description: "Help us build the most comprehensive collection of Ohio-focused datasets. Your local knowledge and data sourcing skills ensure our AI solutions truly serve the region.",
+      description: "Help us curate the datasets that fuel our solutions and tools. Your local knowledge ensures our AI actually serves Ohioans.",
       actions: [
         "Source and curate Ohio-specific datasets",
         "Annotate and validate data quality",
