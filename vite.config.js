@@ -3,7 +3,7 @@ import { defineConfig } from 'vite'
 import path from 'node:path'
 
 export default defineConfig({
-  base: '/ohio-ai-collective/',
+  base: '/',
   plugins: [react()],
   resolve: {
     alias: {
