@@ -208,7 +208,7 @@ export default function Community() {
             Subscribe to our newsletter for the latest updates, or explore our events and job board.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <a href="https://joinforge.beehiiv.com/" target="_blank" rel="noopener noreferrer">
+            <a href="https://ohioaicollective.beehiiv.com/subscribe" target="_blank" rel="noopener noreferrer">
               <Button size="lg" className="text-lg px-8 font-semibold uppercase w-full sm:w-auto"
                       style={{
                         backgroundColor: '#D14D28',
