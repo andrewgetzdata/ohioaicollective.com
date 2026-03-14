@@ -1,4 +1,4 @@
-# JoinForge Data Management
+# Ohio AI Collective — Site Management
 
 This project uses local JSON files for Partners, Jobs, and Events data.
 
@@ -25,3 +25,5 @@ This project uses local JSON files for Partners, Jobs, and Events data.
 - `/edit-event` - Add or edit events
 - `/edit-partner` - Add or edit partners
 - `/validate-data` - Validate JSON data files
+- `/git-workflow` - Git branching, commits, and optional PR creation
+- `/submit-pr` - Create and submit a pull request for changes
