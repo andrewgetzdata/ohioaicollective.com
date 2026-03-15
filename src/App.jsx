@@ -1,10 +1,12 @@
+import { useEffect } from 'react'
+import posthog from 'posthog-js'
 import './App.css'
 import { Toaster } from "@/components/ui/toaster"
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClientInstance } from '@/lib/query-client'
 import VisualEditAgent from '@/lib/VisualEditAgent'
 import { pagesConfig } from './pages.config'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import PageNotFound from './lib/PageNotFound';
 
 const { Pages, Layout, mainPage } = pagesConfig;
@@ -16,10 +18,21 @@ const LayoutWrapper = ({ children, currentPageName }) => Layout ?
   : <>{children}</>;
 
 
+function PostHogPageviewTracker() {
+  const location = useLocation()
+
+  useEffect(() => {
+    posthog.capture('$pageview')
+  }, [location])
+
+  return null
+}
+
 function App() {
   return (
     <QueryClientProvider client={queryClientInstance}>
       <Router basename="/">
+        <PostHogPageviewTracker />
         <Routes>
           <Route path="/" element={
             <LayoutWrapper currentPageName={mainPageKey}>
