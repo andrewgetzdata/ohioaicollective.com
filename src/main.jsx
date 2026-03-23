@@ -4,7 +4,7 @@ import posthog from 'posthog-js'
 import App from '@/App.jsx'
 import '@/index.css'
 
-posthog.init('phc_k5EdmCS8oo2r6PcPbrA7yrlxIscMSIgmTlk9yonqWuZ', {
+posthog.init(import.meta.env.VITE_POSTHOG_KEY, {
   api_host: 'https://us.i.posthog.com',
   person_profiles: 'identified_only',
   capture_pageview: false,
